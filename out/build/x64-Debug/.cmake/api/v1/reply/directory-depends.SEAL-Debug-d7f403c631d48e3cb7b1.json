@@ -1,0 +1,126 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install",
+			"seal_install_target"
+		],
+		"files" : 
+		[
+			"depends/SEAL/CMakeLists.txt",
+			"depends/SEAL/cmake/SEALMacros.cmake"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 379,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 391,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 1,
+				"line" : 64,
+				"parent" : 2
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 580,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 592,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 609,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "include/SEAL-4.1/seal/util",
+			"paths" : 
+			[
+				"out/build/x64-Debug/depends/SEAL/native/src/seal/util/config.h"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 3,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"depends/SEAL/lib/seal-4.1.lib"
+			],
+			"targetId" : "seal::@7d9a6a65061dcce6a898",
+			"targetIndex" : 24,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 4,
+			"component" : "Unspecified",
+			"destination" : "lib/cmake/SEAL-4.1",
+			"exportName" : "SEALTargets",
+			"exportTargets" : 
+			[
+				{
+					"id" : "seal::@7d9a6a65061dcce6a898",
+					"index" : 24
+				}
+			],
+			"paths" : 
+			[
+				"depends/SEAL/CMakeFiles/Export/38c274a671ce422ecc82c7dc6964cfb5/SEALTargets.cmake"
+			],
+			"type" : "export"
+		},
+		{
+			"backtrace" : 5,
+			"component" : "Unspecified",
+			"destination" : "lib/cmake/SEAL-4.1",
+			"paths" : 
+			[
+				"out/build/x64-Debug/depends/SEAL/cmake/SEALConfig.cmake",
+				"out/build/x64-Debug/depends/SEAL/cmake/SEALConfigVersion.cmake"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 6,
+			"component" : "Unspecified",
+			"destination" : "include/SEAL-4.1",
+			"paths" : 
+			[
+				"out/build/x64-Debug/depends/SEAL/thirdparty/msgsl-src/include/gsl"
+			],
+			"type" : "directory"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "depends/SEAL",
+		"source" : "depends/SEAL"
+	}
+}

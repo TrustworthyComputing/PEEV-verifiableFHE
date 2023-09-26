@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "depends/SEAL/thirdparty/zlib-build",
+		"source" : "out/build/x64-Debug/depends/SEAL/thirdparty/zlib-src"
+	}
+}

@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "depends/SEAL/thirdparty/msgsl-build",
+		"source" : "out/build/x64-Debug/depends/SEAL/thirdparty/msgsl-src"
+	}
+}
