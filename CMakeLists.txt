@@ -5,16 +5,32 @@ project(ringsnark LANGUAGES CXX)
 # Executables
 
 
-add_executable(example example.cpp)
-target_sources(example PRIVATE ${CMAKE_CURRENT_LIST_DIR}/example.cpp)
-target_link_libraries(example PRIVATE ringsnark)
+#add_executable(ringsnark-example10 example10.cpp)
+#target_sources(ringsnark-example10 PRIVATE ${CMAKE_CURRENT_LIST_DIR}/example10.cpp)
+#target_link_libraries(ringsnark-example10 PRIVATE ringsnark)
+
+#add_executable(ringsnark-example6 example6.cpp)
+#target_sources(ringsnark-example6 PRIVATE ${CMAKE_CURRENT_LIST_DIR}/example6.cpp)
+#target_link_libraries(ringsnark-example6 PRIVATE ringsnark)
+
+#add_executable(ringsnark-example11 example11.cpp)
+#target_sources(ringsnark-example11 PRIVATE ${CMAKE_CURRENT_LIST_DIR}/example11.cpp)
+#target_link_libraries(ringsnark-example11 PRIVATE ringsnark)
+
+add_executable(ringsnark-example12 example12.cpp)
+target_sources(ringsnark-example12 PRIVATE ${CMAKE_CURRENT_LIST_DIR}/example12.cpp)
+target_link_libraries(ringsnark-example12 PRIVATE ringsnark)
+
+add_executable(bench)
+target_sources(bench PRIVATE ${CMAKE_CURRENT_LIST_DIR}/microbench.cpp)
+target_link_libraries(bench PRIVATE ringsnark)
+
 
 # Includes
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/depends")
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/ringsnark")
 
 target_include_directories(ringsnark INTERFACE ${CMAKE_CURRENT_LIST_DIR}/include/)
-
 include_directories(.)
 
 # Libraries

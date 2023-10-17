@@ -1,0 +1,43 @@
+key: main
+Converting to r1cs
+(computation
+(metadata
+  (parties  prover verifier)
+
+  (inputs
+    (return (bv 16))
+    (x (bv 16) (party 0))
+    (y (bv 16) (party 0))
+  )
+  (commitments
+  )
+)
+(precompute (
+)(
+ (return (bv 16))
+)
+
+  (declare
+ (
+  (y (bv 16))
+  (x (bv 16))
+ )
+(tuple (bvmul x y)))
+
+
+)
+
+
+  (declare
+ (
+  (return (bv 16))
+  (y (bv 16))
+  (x (bv 16))
+ )
+(= (bvmul x y) return))
+
+
+)
+
+Pre-opt R1cs size: 69
+Final R1cs size: 65

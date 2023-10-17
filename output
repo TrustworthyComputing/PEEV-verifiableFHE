@@ -1,0 +1,48 @@
+Options { path: "zok_example2.zok", frontend: FrontendOptions { language: Auto, value_threshold: None }, circ: CircOpt { r1cs: R1csOpt { verified: false, profile: false, div_by_zero: Incomplete, lc_elim_thresh: 50 }, field: FieldOpt { builtin: Bls12381, custom_modulus: "" }, ir: IrOpt { field_to_bv: Wrap, frequent_gc: false }, ram: RamOpt { enabled: false, range: Sort, index: Uniqueness, permutation: Msh }, fmt: FmtOpt { use_default_field: true, hide_field: false }, zsharp: ZsharpOpt { isolate_asserts: false }, datalog: DatalogOpt { rec_limit: 5, lint_prim_rec: false }, c: COpt { sv_functions: false, assert_no_ub: false } }, parties: 2, backend: R1cs { prover_key: "P", verifier_key: "V", lc_elimination_thresh: 50, action: Count, proof_impl: Groth16 } }
+Done with IR optimization
+key: main
+Converting to r1cs
+(computation 
+(metadata
+  (parties  prover verifier)
+
+  (inputs
+    (z (bv 8) (party 0))
+    (y (bv 8) (party 0))
+    (return (bv 8))
+    (x (bv 8) (party 0))
+  )
+  (commitments
+  )
+)
+(precompute (
+)(
+ (return (bv 8))
+)
+
+  (declare
+ (
+  (x (bv 8))
+  (z (bv 8))
+  (y (bv 8))
+ )
+(tuple (bvsub (bvadd (bvmul x y) z) x)))
+
+
+)
+
+
+  (declare
+ (
+  (return (bv 8))
+  (x (bv 8))
+  (z (bv 8))
+  (y (bv 8))
+ )
+(= (bvsub (bvadd (bvmul x y) z) x) return))
+
+
+)
+
+Pre-opt R1cs size: 66
+Final R1cs size: 59
