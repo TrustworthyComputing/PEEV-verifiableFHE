@@ -1,5 +1,0 @@
-# ninja log v5
-94	10150	7148789164517874	CMakeFiles/ringsnark-example2.dir/ringsnark/seal/seal_ring.cpp.obj	d14ab3d82a4a416e
-147	10184	7148789164777878	CMakeFiles/ringsnark-example3.dir/ringsnark/seal/seal_ring.cpp.obj	b990190d5ccf87bb
-36	10195	7148789164977900	CMakeFiles/ringsnark-example.dir/ringsnark/seal/seal_ring.cpp.obj	b1e46ecb64084b52
-98	7753	7148789611270716	CMakeFiles/ringsnark-example4.dir/ringsnark/seal/seal_ring.cpp.obj	e1f91bef63f0ba38
