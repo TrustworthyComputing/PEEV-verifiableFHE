@@ -1,9 +1,0 @@
-libdir=F:/UD/Thesis/ringSNARK/out/install/x64-Debug/lib
-includedir=F:/UD/Thesis/ringSNARK/out/install/x64-Debug/include
-
-Name: gtest
-Description: GoogleTest (without main() function)
-Version: 1.12.1
-URL: https://github.com/google/googletest
-Libs: -L${libdir} -lgtest 
-Cflags: -I${includedir} -DGTEST_HAS_PTHREAD=0
