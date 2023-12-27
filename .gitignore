@@ -34,3 +34,6 @@
 # CMake
 cmake-build-debug/
 cmake-build-release/
+out/build/x64-Debug/depends/SEAL/thirdparty/msgsl-src/
+out/build/x64-Debug/depends/SEAL/thirdparty/zlib-src/
+out/build/x64-Debug/depends/SEAL/thirdparty/zstd-src/
