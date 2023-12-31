@@ -4,7 +4,7 @@
 This framework allows executing homomorphically encrypted programs based on the BGV scheme implementation in Micorsoft [SEAL](https://github.com/microsoft/SEAL) and verifying the computation using [Rinocchio](https://github.com/zkFHE/ringSNARK/tree/main) ZKP protocol.
 
 ### How to cite this work
-The [PEEV article](https://github.com/TrustworthyComputing/PEEV-verifiableFHE/blob/main/PEEV-VerifiableFHE.pdf) that describes this work can be cited as follows:
+The [PEEV article](https://github.com/TrustworthyComputing/PEEV-verifiableFHE/blob/main/docs/PEEV-VerifiableFHE.pdf) that describes this work can be cited as follows:
 
 ```
 @misc{ahmed2023verifiableFHE,
