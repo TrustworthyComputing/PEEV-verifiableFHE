@@ -3,6 +3,18 @@
 
 This framework allows executing homomorphically encrypted programs based on the BGV scheme implementation in Micorsoft [SEAL](https://github.com/microsoft/SEAL) and verifying the computation using [Rinocchio](https://github.com/zkFHE/ringSNARK/tree/main) ZKP protocol.
 
+### How to cite this work
+The [PEEV article](https://github.com/TrustworthyComputing/PEEV-verifiableFHE/blob/main/PEEV-VerifiableFHE.pdf) that describes this work can be cited as follows:
+
+```
+@misc{ahmed2023verifiableFHE,
+    author       = {Omar Ahmed and Charles Gouert and Nektarios Georgios Tsoutsos},
+    title        = {{PEEV: Parse Encrypt Execute Verify - A Verifiable FHE Framework}},
+    year         = {2023},
+    note         = {\url{https://github.com/TrustworthyComputing/PEEV-verifiableFHE/blob/main/PEEV-VerifiableFHE.pdf}},
+}
+```
+
 # Structure
 * opl - a directory includes the OpL files that are used to create the arithmetic circuit executed in PEEV. The OpL is created by parsing [CirC](https://github.com/circify/circ) programs using [YAP](https://github.com/OmarAlmighty/YAP).
 * Driver.cpp - for reading the `.opl` file and executing the arithmetic circuit. This used for executing most of the benchmarks provided with the following parameters' values:
@@ -41,14 +53,4 @@ The project needs [Boost](https://www.boost.org/) library.
 # Security
 This a proof-of-concept implementation for research purposes. It is not ready for deployment in critical and production systems.
 
-### How to cite this work
-The [PEEV article](https://github.com/TrustworthyComputing/PEEV-verifiableFHE/blob/main/PEEV-VerifiableFHE.pdf) that describes this work can be cited as follows:
 
-```
-@misc{ahmed2023verifiableFHE,
-    author       = {Omar Ahmed and Charles Gouert and Nektarios Georgios Tsoutsos},
-    title        = {{PEEV: Parse Encrypt Execute Verify - A Verifiable FHE Framework}},
-    year         = {2023},
-    note         = {\url{https://github.com/TrustworthyComputing/PEEV-verifiableFHE/blob/main/PEEV-VerifiableFHE.pdf}},
-}
-```
