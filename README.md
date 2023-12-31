@@ -11,7 +11,7 @@ The [PEEV article](https://github.com/TrustworthyComputing/PEEV-verifiableFHE/bl
     author       = {Omar Ahmed and Charles Gouert and Nektarios Georgios Tsoutsos},
     title        = {{PEEV: Parse Encrypt Execute Verify - A Verifiable FHE Framework}},
     year         = {2023},
-    note         = {\url{https://github.com/TrustworthyComputing/PEEV-verifiableFHE/blob/main/PEEV-VerifiableFHE.pdf}},
+    note         = {\url{https://trustworthycomputing.github.io/PEEV-verifiableFHE/PEEV-VerifiableFHE.pdf}},
 }
 ```
 
