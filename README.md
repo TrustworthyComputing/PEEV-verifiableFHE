@@ -40,3 +40,15 @@ The project needs [Boost](https://www.boost.org/) library.
 
 # Security
 This a proof-of-concept implementation for research purposes. It is not ready for deployment in critical and production systems.
+
+### How to cite this work
+The [PEEV article](https://github.com/TrustworthyComputing/PEEV-verifiableFHE/blob/main/PEEV-VerifiableFHE.pdf) that describes this work can be cited as follows:
+
+```
+@misc{ahmed2023verifiableFHE,
+    author       = {Omar Ahmed and Charles Gouert and Nektarios Georgios Tsoutsos},
+    title        = {{PEEV: Parse Encrypt Execute Verify - A Verifiable FHE Framework}},
+    year         = {2023},
+    note         = {\url{https://github.com/TrustworthyComputing/PEEV-verifiableFHE/blob/main/PEEV-VerifiableFHE.pdf}},
+}
+```
