@@ -16,7 +16,7 @@ The [PEEV article](https://github.com/TrustworthyComputing/PEEV-verifiableFHE/bl
 ```
 
 # Structure
-* opl - a directory includes the OpL files that are used to create the arithmetic circuit executed in PEEV. The OpL is created by parsing [CirC](https://github.com/circify/circ) programs using [YAP](https://github.com/OmarAlmighty/YAP).
+* opl - a directory includes the OpL files that are used to create the arithmetic circuit executed in PEEV. The OpL is created by parsing [CirC](https://github.com/circify/circ) programs using [YAP](https://github.com/TrustworthyComputing/YAParser.git).
 * Driver.cpp - for reading the `.opl` file and executing the arithmetic circuit. This used for executing most of the benchmarks provided with the following parameters' values:
     * BGV ploynomial modulus degree = $2^{14}$
     * ZKP plaintext bit size = $30$ bits
