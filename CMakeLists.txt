@@ -18,6 +18,10 @@ add_executable(vppc3 Driver_eq_check.cpp)
 target_sources(vppc3 PRIVATE ${CMAKE_CURRENT_LIST_DIR}/Driver_eq_check.cpp)
 target_link_libraries(vppc3 PRIVATE ringsnark)
 
+add_executable(vppc4 Driver_larger_ptxt.cpp)
+target_sources(vppc4 PRIVATE ${CMAKE_CURRENT_LIST_DIR}/Driver_larger_ptxt.cpp)
+target_link_libraries(vppc4 PRIVATE ringsnark)
+
 #add_executable(bench)
 #target_sources(bench PRIVATE ${CMAKE_CURRENT_LIST_DIR}/microbench.cpp)
 #target_link_libraries(bench PRIVATE ringsnark)
