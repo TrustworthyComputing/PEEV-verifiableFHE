@@ -28,7 +28,11 @@ The [PEEV article](https://github.com/TrustworthyComputing/PEEV-verifiableFHE/bl
 * Driver_larger_params.cpp - this has another parameters used for executing the factorial program. It has the following parameters' values:
     * BGV ploynomial modulus degree = $2^{15}$
     * ZKP plaintext bit size = $30$ bits
-    * SEAL plaintext bit size = $30$ bits
+    * SEAL plaintext bit size = $30$ bits 
+* Driver_larger_ptxt.cpp - provides a plaintext bit size of 42 bits for Rinocchio and SEAL.
+    * BGV ploynomial modulus degree = $2^{15}$
+    * ZKP plaintext bit size = $42$ bits
+    * SEAL plaintext bit size = $42$ bits 
 
 # How to run
 ## Build
@@ -39,13 +43,14 @@ mkdir build && cd build && cmake ..
 cd .. && cmake --build build --config RELEASE
 ```
 ## Run 
-Navigate to binary path (on Windows, it is on the build/Release directory), opne the cmd, execute `<program.exe> -f <file.opl>`. For example,
+Navigate to binary path (on Windows, it is on the build/Release directory), open the cmd, execute `<program.exe> -f <file.opl>`. For example,
 `vppc.exe -f dot_product_v8.opl`. 
 
 ### Note
 * vppc.exe is the executable of Driver.cpp
 * vppc2.exe is the executable of Driver_eq_check.cpp
 * vppc3.exe is the executable of Driver_larger_params.cpp
+* vppc4.exe is the executable of Driver_larger_ptxt.cpp
 
 # Requirments
 The project needs [Boost](https://www.boost.org/) library.
