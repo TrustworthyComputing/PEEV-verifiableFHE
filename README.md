@@ -1,17 +1,20 @@
-# PEEV
- Parse Encrypt Execute Verify -  A Verifiable FHE Framework.
+# PEEV: Parse Encrypt Execute Verify - A Verifiable FHE Framework.
 
 This framework allows executing homomorphically encrypted programs based on the BGV scheme implementation in Micorsoft [SEAL](https://github.com/microsoft/SEAL) and verifying the computation using [Rinocchio](https://github.com/zkFHE/ringSNARK/tree/main) ZKP protocol.
 
 ### How to cite this work
-The [PEEV article](https://github.com/TrustworthyComputing/PEEV-verifiableFHE/blob/main/docs/PEEV-VerifiableFHE.pdf) that describes this work can be cited as follows:
+The [PEEV article](https://ieeexplore.ieee.org/document/10587231) that describes this work can be cited as follows:
 
 ```
-@misc{ahmed2023verifiableFHE,
-    author       = {Omar Ahmed and Charles Gouert and Nektarios Georgios Tsoutsos},
-    title        = {{PEEV: Parse Encrypt Execute Verify - A Verifiable FHE Framework}},
-    year         = {2023},
-    note         = {\url{https://trustworthycomputing.github.io/PEEV-verifiableFHE/PEEV-VerifiableFHE.pdf}},
+@article{ahmed2023verifiableFHE,
+    author       = {Ahmed, Omar and Gouert, Charles and Georgios Tsoutsos, Nektarios},
+    journal      = {IEEE Access}, 
+    title        = {PEEV: Parse Encrypt Execute Verify - A Verifiable FHE Framework}, 
+    year         = {2024},
+    volume       = {12},
+    number       = {},
+    pages        = {94673-94689},
+    note         = {\url{https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10587231}}
 }
 ```
 
