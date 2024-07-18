@@ -40,7 +40,7 @@ The [PEEV article](https://ieeexplore.ieee.org/document/10587231) that describes
 # How to run
 ## Build
 ```
-git clone https://github.com/OmarAlmighty/PEEV.git
+git https://github.com/TrustworthyComputing/PEEV-verifiableFHE/
 cd PEEV
 mkdir build && cd build && cmake ..
 cd .. && cmake --build build --config RELEASE
