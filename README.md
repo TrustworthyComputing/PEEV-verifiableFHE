@@ -1,6 +1,6 @@
 # PEEV: Parse Encrypt Execute Verify - A Verifiable FHE Framework.
 
-This framework allows executing homomorphically encrypted programs based on the BGV scheme implementation in Micorsoft [SEAL](https://github.com/microsoft/SEAL) and verifying the computation using [Rinocchio](https://github.com/zkFHE/ringSNARK/tree/main) ZKP protocol.
+This framework allows executing homomorphically encrypted programs based on the BGV scheme implementation in Microsoft [SEAL](https://github.com/microsoft/SEAL) and verifying the computation using [Rinocchio](https://github.com/zkFHE/ringSNARK/tree/main) ZKP protocol.
 
 ### How to cite this work
 The [PEEV article](https://ieeexplore.ieee.org/document/10587231) that describes this work can be cited as follows:
