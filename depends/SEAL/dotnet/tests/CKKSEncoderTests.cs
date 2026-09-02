@@ -27,12 +27,12 @@ namespace SEALNetTest
             double delta = 1 << 16;
             List<Complex> result = new List<Complex>();
 
-            CKKSEncoder zkp_encoder = new CKKSEncoder(context);
-            Assert.AreEqual(32ul, zkp_encoder.SlotCount);
+            CKKSEncoder encoder = new CKKSEncoder(context);
+            Assert.AreEqual(32ul, encoder.SlotCount);
 
             double value = 10d;
-            zkp_encoder.Encode(value, delta, plain);
-            zkp_encoder.Decode(plain, result);
+            encoder.Encode(value, delta, plain);
+            encoder.Decode(plain, result);
 
             for (int i = 0; i < slots; i++)
             {
@@ -52,14 +52,14 @@ namespace SEALNetTest
             SEALContext context = new SEALContext(parms,
                 expandModChain: false,
                 secLevel: SecLevelType.None);
-            CKKSEncoder zkp_encoder = new CKKSEncoder(context);
+            CKKSEncoder encoder = new CKKSEncoder(context);
 
             Plaintext plain = new Plaintext();
             List<Complex> result = new List<Complex>();
 
             long value = 15;
-            zkp_encoder.Encode(value, plain);
-            zkp_encoder.Decode(plain, result);
+            encoder.Encode(value, plain);
+            encoder.Decode(plain, result);
 
             for (int i = 0; i < slots; i++)
             {
@@ -80,15 +80,15 @@ namespace SEALNetTest
             SEALContext context = new SEALContext(parms,
                 expandModChain: false,
                 secLevel: SecLevelType.None);
-            CKKSEncoder zkp_encoder = new CKKSEncoder(context);
+            CKKSEncoder encoder = new CKKSEncoder(context);
 
             Plaintext plain = new Plaintext();
             Complex value = new Complex(3.1415, 2.71828);
 
-            zkp_encoder.Encode(value, scale: Math.Pow(2, 20), destination: plain);
+            encoder.Encode(value, scale: Math.Pow(2, 20), destination: plain);
 
             List<Complex> result = new List<Complex>();
-            zkp_encoder.Decode(plain, result);
+            encoder.Decode(plain, result);
 
             Assert.IsTrue(result.Count > 0);
             Assert.AreEqual(3.1415, result[0].Real, delta: 0.0001);
@@ -105,7 +105,7 @@ namespace SEALNetTest
             SEALContext context = new SEALContext(parms,
                 expandModChain: false,
                 secLevel: SecLevelType.None);
-            CKKSEncoder zkp_encoder = new CKKSEncoder(context);
+            CKKSEncoder encoder = new CKKSEncoder(context);
 
             List<Complex> values = new List<Complex>(slots);
             Random rnd = new Random();
@@ -118,10 +118,10 @@ namespace SEALNetTest
             }
 
             Plaintext plain = new Plaintext();
-            zkp_encoder.Encode(values, delta, plain);
+            encoder.Encode(values, delta, plain);
 
             List<Complex> result = new List<Complex>();
-            zkp_encoder.Decode(plain, result);
+            encoder.Decode(plain, result);
 
             for (int i = 0; i < slots; i++)
             {
@@ -142,14 +142,14 @@ namespace SEALNetTest
             SEALContext context = new SEALContext(parms,
                 expandModChain: false,
                 secLevel: SecLevelType.None);
-            CKKSEncoder zkp_encoder = new CKKSEncoder(context);
+            CKKSEncoder encoder = new CKKSEncoder(context);
             Plaintext plain = new Plaintext();
 
             double[] values = new double[] { 0.1, 2.3, 34.4 };
-            zkp_encoder.Encode(values, scale: Math.Pow(2, 20), destination: plain);
+            encoder.Encode(values, scale: Math.Pow(2, 20), destination: plain);
 
             List<double> result = new List<double>();
-            zkp_encoder.Decode(plain, result);
+            encoder.Decode(plain, result);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(0.1, result[0], delta: 0.001);
@@ -169,7 +169,7 @@ namespace SEALNetTest
             SEALContext context = new SEALContext(parms,
                 expandModChain: false,
                 secLevel: SecLevelType.None);
-            CKKSEncoder zkp_encoder = new CKKSEncoder(context);
+            CKKSEncoder encoder = new CKKSEncoder(context);
             List<double> vald = new List<double>();
             List<double> vald_null = null;
             List<Complex> valc = new List<Complex>();
@@ -179,53 +179,53 @@ namespace SEALNetTest
             MemoryPoolHandle pool = MemoryManager.GetPool(MMProfOpt.ForceGlobal);
             Complex complex = new Complex(1, 2);
 
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder = new CKKSEncoder(null));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder = new CKKSEncoder(null));
 
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Encode(vald, ParmsId.Zero, 10.0, plain_null));
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Encode(vald, null, 10.0, plain));
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Encode(vald_null, ParmsId.Zero, 10.0, plain));
-            Utilities.AssertThrows<ArgumentException>(() => zkp_encoder.Encode(vald, ParmsId.Zero, 10.0, plain, pool));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Encode(vald, ParmsId.Zero, 10.0, plain_null));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Encode(vald, null, 10.0, plain));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Encode(vald_null, ParmsId.Zero, 10.0, plain));
+            Utilities.AssertThrows<ArgumentException>(() => encoder.Encode(vald, ParmsId.Zero, 10.0, plain, pool));
 
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Encode(valc, ParmsId.Zero, 10.0, plain_null));
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Encode(valc, null, 10.0, plain));
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Encode(valc_null, ParmsId.Zero, 10.0, plain));
-            Utilities.AssertThrows<ArgumentException>(() => zkp_encoder.Encode(valc, ParmsId.Zero, 10.0, plain, pool));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Encode(valc, ParmsId.Zero, 10.0, plain_null));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Encode(valc, null, 10.0, plain));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Encode(valc_null, ParmsId.Zero, 10.0, plain));
+            Utilities.AssertThrows<ArgumentException>(() => encoder.Encode(valc, ParmsId.Zero, 10.0, plain, pool));
 
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Encode(vald, 10.0, plain_null));
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Encode(vald_null, 10.0, plain));
-            Utilities.AssertThrows<ArgumentException>(() => zkp_encoder.Encode(vald, -10.0, plain, pool));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Encode(vald, 10.0, plain_null));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Encode(vald_null, 10.0, plain));
+            Utilities.AssertThrows<ArgumentException>(() => encoder.Encode(vald, -10.0, plain, pool));
 
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Encode(valc, 10.0, plain_null));
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Encode(valc_null, 10.0, plain));
-            Utilities.AssertThrows<ArgumentException>(() => zkp_encoder.Encode(valc, -10.0, plain, pool));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Encode(valc, 10.0, plain_null));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Encode(valc_null, 10.0, plain));
+            Utilities.AssertThrows<ArgumentException>(() => encoder.Encode(valc, -10.0, plain, pool));
 
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Encode(10.0, ParmsId.Zero, 20.0, plain_null));
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Encode(10.0, null, 20.0, plain));
-            Utilities.AssertThrows<ArgumentException>(() => zkp_encoder.Encode(10.0, ParmsId.Zero, 20.0, plain, pool));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Encode(10.0, ParmsId.Zero, 20.0, plain_null));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Encode(10.0, null, 20.0, plain));
+            Utilities.AssertThrows<ArgumentException>(() => encoder.Encode(10.0, ParmsId.Zero, 20.0, plain, pool));
 
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Encode(10.0, 20.0, plain_null));
-            Utilities.AssertThrows<ArgumentException>(() => zkp_encoder.Encode(10.0, -20.0, plain, pool));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Encode(10.0, 20.0, plain_null));
+            Utilities.AssertThrows<ArgumentException>(() => encoder.Encode(10.0, -20.0, plain, pool));
 
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Encode(complex, ParmsId.Zero, 10.0, plain_null));
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Encode(complex, null, 10.0, plain));
-            Utilities.AssertThrows<ArgumentException>(() => zkp_encoder.Encode(complex, ParmsId.Zero, 10.0, plain, pool));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Encode(complex, ParmsId.Zero, 10.0, plain_null));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Encode(complex, null, 10.0, plain));
+            Utilities.AssertThrows<ArgumentException>(() => encoder.Encode(complex, ParmsId.Zero, 10.0, plain, pool));
 
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Encode(complex, 10.0, plain_null));
-            Utilities.AssertThrows<ArgumentException>(() => zkp_encoder.Encode(complex, -10.0, plain, pool));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Encode(complex, 10.0, plain_null));
+            Utilities.AssertThrows<ArgumentException>(() => encoder.Encode(complex, -10.0, plain, pool));
 
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Encode(10, ParmsId.Zero, plain_null));
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Encode(10, null, plain));
-            Utilities.AssertThrows<ArgumentException>(() => zkp_encoder.Encode(10, ParmsId.Zero, plain));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Encode(10, ParmsId.Zero, plain_null));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Encode(10, null, plain));
+            Utilities.AssertThrows<ArgumentException>(() => encoder.Encode(10, ParmsId.Zero, plain));
 
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Encode(10, plain_null));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Encode(10, plain_null));
 
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Decode(plain, vald_null));
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Decode(plain_null, vald));
-            Utilities.AssertThrows<ArgumentException>(() => zkp_encoder.Decode(plain, vald, pool));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Decode(plain, vald_null));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Decode(plain_null, vald));
+            Utilities.AssertThrows<ArgumentException>(() => encoder.Decode(plain, vald, pool));
 
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Decode(plain, valc_null));
-            Utilities.AssertThrows<ArgumentNullException>(() => zkp_encoder.Decode(plain_null, valc));
-            Utilities.AssertThrows<ArgumentException>(() => zkp_encoder.Decode(plain, valc, pool));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Decode(plain, valc_null));
+            Utilities.AssertThrows<ArgumentNullException>(() => encoder.Decode(plain_null, valc));
+            Utilities.AssertThrows<ArgumentException>(() => encoder.Decode(plain, valc, pool));
         }
     }
 }

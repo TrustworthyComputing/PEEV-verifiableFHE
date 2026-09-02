@@ -2,39 +2,19 @@ cmake_minimum_required(VERSION 3.20)
 
 project(ringsnark LANGUAGES CXX)
 
-# Local header files here ONLY
+set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin )
 
-# Executables
-
-add_executable(vppc Driver.cpp)
-target_sources(vppc PRIVATE ${CMAKE_CURRENT_LIST_DIR}/Driver.cpp)
-target_link_libraries(vppc PRIVATE ringsnark)
-
-add_executable(vppc2 Driver_larger_params.cpp)
-target_sources(vppc2 PRIVATE ${CMAKE_CURRENT_LIST_DIR}/Driver_larger_params.cpp)
-target_link_libraries(vppc2 PRIVATE ringsnark)
-
-add_executable(vppc3 Driver_eq_check.cpp)
-target_sources(vppc3 PRIVATE ${CMAKE_CURRENT_LIST_DIR}/Driver_eq_check.cpp)
-target_link_libraries(vppc3 PRIVATE ringsnark)
-
-add_executable(vppc4 Driver_larger_ptxt.cpp)
-target_sources(vppc4 PRIVATE ${CMAKE_CURRENT_LIST_DIR}/Driver_larger_ptxt.cpp)
-target_link_libraries(vppc4 PRIVATE ringsnark)
-
-#add_executable(bench)
-#target_sources(bench PRIVATE ${CMAKE_CURRENT_LIST_DIR}/microbench.cpp)
-#target_link_libraries(bench PRIVATE ringsnark)
-
+add_executable(bench)
+target_sources(bench PRIVATE ${CMAKE_CURRENT_LIST_DIR}/microbench.cpp)
+target_link_libraries(bench PRIVATE ringsnark)
 
 # Includes
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/depends")
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/ringsnark")
 
 target_include_directories(ringsnark INTERFACE ${CMAKE_CURRENT_LIST_DIR}/include/)
+
 include_directories(.)
-
-
 
 # Libraries
 ## lib: SEAL
@@ -47,11 +27,51 @@ else ()
     message(FATAL_ERROR "Cannot find target SEAL::seal or SEAL::seal_shared")
 endif ()
 
-
-find_package(Boost 1.82.0 COMPONENTS math)
-
 ## lib: polytools
 target_link_libraries(ringsnark INTERFACE polytools)
+
+## lib: Boost
+set(Boost_USE_STATIC_LIBS OFF)
+set(Boost_USE_MULTITHREADED ON)
+set(Boost_USE_STATIC_RUNTIME OFF)
+find_package(Boost 1.80)
+
 target_include_directories(ringsnark INTERFACE ${Boost_INCLUDE_DIRS})
 target_link_libraries(ringsnark INTERFACE ${Boost_LIBRARIES})
 
+## lib: Google benchmark
+target_link_libraries(ringsnark INTERFACE benchmark::benchmark)
+
+## lib: OpenMP
+find_package(OpenMP)
+if(OpenMP_CXX_FOUND)
+    message(STATUS "OpenMP enabled")
+    target_link_libraries(ringsnark INTERFACE OpenMP::OpenMP_CXX)
+endif()
+
+find_library(GMP_LIBRARY gmp REQUIRED)
+
+# Features
+include(CheckIPOSupported)
+check_ipo_supported(RESULT result)
+if(result)
+    message(STATUS "IPO / LTO enabled")
+    set_target_properties(foo PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
+else()
+    message(STATUS "IPO / LTO enabled")
+endif()
+
+# Executables
+## Main Executable (PEEV)
+file(GLOB PEEV_SOURCES "src/*.cpp")
+add_executable(peev ${PEEV_SOURCES})
+target_link_libraries(peev PRIVATE ${GMP_LIBRARY})
+target_link_libraries(peev PRIVATE ringsnark)
+
+## Benchmarks
+file( GLOB_RECURSE EXAMPLES_SOURCES RELATIVE "${CMAKE_SOURCE_DIR}/benchmarks/" "benchmarks/*.cpp" )
+foreach( source_file ${EXAMPLES_SOURCES} )
+    string( REPLACE ".cpp" "" source_name ${source_file} )
+    add_executable( ${source_name} "benchmarks/${source_file}" )
+    target_link_libraries(${source_name} PRIVATE ringsnark)
+endforeach( source_file ${EXAMPLES_SOURCES} )

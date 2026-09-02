@@ -433,7 +433,7 @@ namespace Microsoft.Research.SEAL
         }
 
         /// <summary>
-        /// SEALContext for this zkp_encoder
+        /// SEALContext for this encoder
         /// </summary>
         private readonly SEALContext context_ = null;
 

@@ -1798,7 +1798,7 @@ namespace SEALNetTest
             SEALContext context = new SEALContext(parms,
                 expandModChain: true,
                 secLevel: SecLevelType.None);
-            CKKSEncoder zkp_encoder = new CKKSEncoder(context);
+            CKKSEncoder encoder = new CKKSEncoder(context);
             KeyGenerator keygen = new KeyGenerator(context);
             SecretKey secretKey = keygen.SecretKey;
             keygen.CreatePublicKey(out PublicKey publicKey);
@@ -1812,9 +1812,9 @@ namespace SEALNetTest
             Plaintext coeff1 = new Plaintext();
             Plaintext coeff2 = new Plaintext();
             Plaintext coeff3 = new Plaintext();
-            zkp_encoder.Encode(2.0, scale, coeff1);
-            zkp_encoder.Encode(3.0, scale, coeff2);
-            zkp_encoder.Encode(1.0, scale, coeff3);
+            encoder.Encode(2.0, scale, coeff1);
+            encoder.Encode(3.0, scale, coeff2);
+            encoder.Encode(1.0, scale, coeff3);
 
             Ciphertext encX1 = new Ciphertext();
             Ciphertext encX2 = new Ciphertext();
@@ -1837,7 +1837,7 @@ namespace SEALNetTest
             Assert.IsNotNull(result);
 
             List<double> destination = new List<double>();
-            zkp_encoder.Decode(result, destination);
+            encoder.Decode(result, destination);
 
             Assert.IsNotNull(destination);
             foreach(double val in destination)
@@ -1845,7 +1845,7 @@ namespace SEALNetTest
                 Assert.AreEqual(4.0, val, delta: 0.001);
             }
 
-            zkp_encoder.Decode(coeff2, destination);
+            encoder.Decode(coeff2, destination);
 
             foreach(double val in destination)
             {
@@ -1853,7 +1853,7 @@ namespace SEALNetTest
             }
 
             decryptor.Decrypt(encX2, result);
-            zkp_encoder.Decode(result, destination);
+            encoder.Decode(result, destination);
 
             foreach (double val in destination)
             {
@@ -1881,7 +1881,7 @@ namespace SEALNetTest
                 Encryptor encryptor = new Encryptor(context, publicKey);
                 Decryptor decryptor = new Decryptor(context, keygen.SecretKey);
                 Evaluator evaluator = new Evaluator(context);
-                BatchEncoder zkp_encoder = new BatchEncoder(context);
+                BatchEncoder encoder = new BatchEncoder(context);
 
                 Plaintext plain = new Plaintext();
                 List<ulong> vec = new List<ulong>
@@ -1890,7 +1890,7 @@ namespace SEALNetTest
                     5, 6, 7, 8
                 };
 
-                zkp_encoder.Encode(vec, plain);
+                encoder.Encode(vec, plain);
 
                 Ciphertext encrypted = new Ciphertext();
                 Ciphertext encdest = new Ciphertext();
@@ -1899,7 +1899,7 @@ namespace SEALNetTest
                 encryptor.Encrypt(plain, encrypted);
                 evaluator.RotateColumns(encrypted, galoisKeys, encdest);
                 decryptor.Decrypt(encdest, plaindest);
-                zkp_encoder.Decode(plaindest, vec);
+                encoder.Decode(plaindest, vec);
 
                 Assert.IsTrue(AreCollectionsEqual(vec, new List<ulong>
                 {
@@ -1909,7 +1909,7 @@ namespace SEALNetTest
 
                 evaluator.RotateRows(encdest, -1, galoisKeys, encrypted);
                 decryptor.Decrypt(encrypted, plaindest);
-                zkp_encoder.Decode(plaindest, vec);
+                encoder.Decode(plaindest, vec);
 
                 Assert.IsTrue(AreCollectionsEqual(vec, new List<ulong>
                 {
@@ -1919,7 +1919,7 @@ namespace SEALNetTest
 
                 evaluator.RotateRowsInplace(encrypted, 2, galoisKeys);
                 decryptor.Decrypt(encrypted, plaindest);
-                zkp_encoder.Decode(plaindest, vec);
+                encoder.Decode(plaindest, vec);
 
                 Assert.IsTrue(AreCollectionsEqual(vec, new List<ulong>
                 {
@@ -1929,7 +1929,7 @@ namespace SEALNetTest
 
                 evaluator.RotateColumnsInplace(encrypted, galoisKeys);
                 decryptor.Decrypt(encrypted, plaindest);
-                zkp_encoder.Decode(plaindest, vec);
+                encoder.Decode(plaindest, vec);
 
                 Assert.IsTrue(AreCollectionsEqual(vec, new List<ulong>
                 {
@@ -1954,7 +1954,7 @@ namespace SEALNetTest
                 Encryptor encryptor = new Encryptor(context, publicKey);
                 Decryptor decryptor = new Decryptor(context, keygen.SecretKey);
                 Evaluator evaluator = new Evaluator(context);
-                BatchEncoder zkp_encoder = new BatchEncoder(context);
+                BatchEncoder encoder = new BatchEncoder(context);
 
                 Plaintext plain = new Plaintext();
                 List<ulong> vec = new List<ulong>
@@ -1963,7 +1963,7 @@ namespace SEALNetTest
                     5, 6, 7, 8
                 };
 
-                zkp_encoder.Encode(vec, plain);
+                encoder.Encode(vec, plain);
 
                 Ciphertext encrypted = new Ciphertext();
                 Ciphertext encdest = new Ciphertext();
@@ -1972,7 +1972,7 @@ namespace SEALNetTest
                 encryptor.Encrypt(plain, encrypted);
                 evaluator.RotateColumns(encrypted, galoisKeys, encdest);
                 decryptor.Decrypt(encdest, plaindest);
-                zkp_encoder.Decode(plaindest, vec);
+                encoder.Decode(plaindest, vec);
 
                 Assert.IsTrue(AreCollectionsEqual(vec, new List<ulong>
                 {
@@ -1982,7 +1982,7 @@ namespace SEALNetTest
 
                 evaluator.RotateRows(encdest, -1, galoisKeys, encrypted);
                 decryptor.Decrypt(encrypted, plaindest);
-                zkp_encoder.Decode(plaindest, vec);
+                encoder.Decode(plaindest, vec);
 
                 Assert.IsTrue(AreCollectionsEqual(vec, new List<ulong>
                 {
@@ -1992,7 +1992,7 @@ namespace SEALNetTest
 
                 evaluator.RotateRowsInplace(encrypted, 2, galoisKeys);
                 decryptor.Decrypt(encrypted, plaindest);
-                zkp_encoder.Decode(plaindest, vec);
+                encoder.Decode(plaindest, vec);
 
                 Assert.IsTrue(AreCollectionsEqual(vec, new List<ulong>
                 {
@@ -2002,7 +2002,7 @@ namespace SEALNetTest
 
                 evaluator.RotateColumnsInplace(encrypted, galoisKeys);
                 decryptor.Decrypt(encrypted, plaindest);
-                zkp_encoder.Decode(plaindest, vec);
+                encoder.Decode(plaindest, vec);
 
                 Assert.IsTrue(AreCollectionsEqual(vec, new List<ulong>
                 {
@@ -2132,7 +2132,7 @@ namespace SEALNetTest
             Encryptor encryptor = new Encryptor(context, publicKey);
             Decryptor decryptor = new Decryptor(context, keygen.SecretKey);
             Evaluator evaluator = new Evaluator(context);
-            CKKSEncoder zkp_encoder = new CKKSEncoder(context);
+            CKKSEncoder encoder = new CKKSEncoder(context);
 
             const double delta = 1ul << 30;
 
@@ -2149,13 +2149,13 @@ namespace SEALNetTest
 
             List<Complex> output = new List<Complex>();
 
-            zkp_encoder.Encode(input, context.FirstParmsId, delta, plain);
+            encoder.Encode(input, context.FirstParmsId, delta, plain);
 
             int shift = 1;
             encryptor.Encrypt(plain, encrypted);
             evaluator.RotateVectorInplace(encrypted, shift, galoisKeys);
             decryptor.Decrypt(encrypted, plain);
-            zkp_encoder.Decode(plain, output);
+            encoder.Decode(plain, output);
 
             for (int i = 0; i < slotSize; i++)
             {
@@ -2163,12 +2163,12 @@ namespace SEALNetTest
                 Assert.AreEqual(input[(i + shift) % slotSize].Imaginary, Math.Round(output[i].Imaginary), delta: 0.1);
             }
 
-            zkp_encoder.Encode(input, context.FirstParmsId, delta, plain);
+            encoder.Encode(input, context.FirstParmsId, delta, plain);
             shift = 3;
             encryptor.Encrypt(plain, encrypted);
             evaluator.RotateVectorInplace(encrypted, shift, galoisKeys);
             decryptor.Decrypt(encrypted, plain);
-            zkp_encoder.Decode(plain, output);
+            encoder.Decode(plain, output);
 
             for (int i = 0; i < slotSize; i++)
             {
@@ -2196,7 +2196,7 @@ namespace SEALNetTest
             Encryptor encryptor = new Encryptor(context, publicKey);
             Decryptor decryptor = new Decryptor(context, keygen.SecretKey);
             Evaluator evaluator = new Evaluator(context);
-            CKKSEncoder zkp_encoder = new CKKSEncoder(context);
+            CKKSEncoder encoder = new CKKSEncoder(context);
 
             const double delta = 1ul << 30;
 
@@ -2213,11 +2213,11 @@ namespace SEALNetTest
 
             List<Complex> output = new List<Complex>();
 
-            zkp_encoder.Encode(input, context.FirstParmsId, delta, plain);
+            encoder.Encode(input, context.FirstParmsId, delta, plain);
             encryptor.Encrypt(plain, encrypted);
             evaluator.ComplexConjugateInplace(encrypted, galoisKeys);
             decryptor.Decrypt(encrypted, plain);
-            zkp_encoder.Decode(plain, output);
+            encoder.Decode(plain, output);
 
             for (int i = 0; i < slotSize; i++)
             {

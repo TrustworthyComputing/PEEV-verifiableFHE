@@ -452,7 +452,7 @@ namespace SEALNetTest
 
             Encryptor encryptor = new Encryptor(context, publicKey);
             Evaluator evaluator = new Evaluator(context);
-            CKKSEncoder zkp_encoder = new CKKSEncoder(context);
+            CKKSEncoder encoder = new CKKSEncoder(context);
 
             MemoryPoolHandle pool = MemoryManager.GetPool(MMProfOpt.ForceNew);
             Assert.AreEqual(0ul, pool.AllocByteCount);
@@ -472,7 +472,7 @@ namespace SEALNetTest
                 new Complex(4, 4)
             };
             double delta = Math.Pow(2, 70);
-            zkp_encoder.Encode(input, context.FirstParmsId, delta, plain);
+            encoder.Encode(input, context.FirstParmsId, delta, plain);
             encryptor.Encrypt(plain, encrypted);
 
             Assert.AreEqual(delta, encrypted.Scale, delta: Math.Pow(2, 60));

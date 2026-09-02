@@ -24,38 +24,38 @@ namespace SEALNetTest
                 expandModChain: false,
                 secLevel: SecLevelType.None);
 
-            BatchEncoder zkp_encoder = new BatchEncoder(context);
+            BatchEncoder encoder = new BatchEncoder(context);
 
-            Assert.AreEqual(64ul, zkp_encoder.SlotCount);
+            Assert.AreEqual(64ul, encoder.SlotCount);
 
             List<ulong> plainList = new List<ulong>();
-            for (ulong i = 0; i < zkp_encoder.SlotCount; i++)
+            for (ulong i = 0; i < encoder.SlotCount; i++)
             {
                 plainList.Add((ulong)i);
             }
 
             Plaintext plain = new Plaintext();
-            zkp_encoder.Encode(plainList, plain);
+            encoder.Encode(plainList, plain);
 
             List<ulong> plainList2 = new List<ulong>();
-            zkp_encoder.Decode(plain, plainList2);
+            encoder.Decode(plain, plainList2);
 
-            for (ulong i = 0; i < zkp_encoder.SlotCount; i++)
+            for (ulong i = 0; i < encoder.SlotCount; i++)
             {
                 Assert.AreEqual(plainList[checked((int)i)], plainList2[checked((int)i)]);
             }
 
-            for (ulong i = 0; i < zkp_encoder.SlotCount; i++)
+            for (ulong i = 0; i < encoder.SlotCount; i++)
             {
                 plainList[checked((int)i)] = 5;
             }
 
-            zkp_encoder.Encode(plainList, plain);
+            encoder.Encode(plainList, plain);
             Assert.AreEqual("5", plain.ToString());
 
-            zkp_encoder.Decode(plain, plainList2);
+            encoder.Decode(plain, plainList2);
 
-            for (ulong i = 0; i < zkp_encoder.SlotCount; i++)
+            for (ulong i = 0; i < encoder.SlotCount; i++)
             {
                 Assert.AreEqual(plainList[checked((int)i)], plainList2[checked((int)i)]);
             }
@@ -66,10 +66,10 @@ namespace SEALNetTest
                 shortList.Add(i);
             }
 
-            zkp_encoder.Encode(shortList, plain);
+            encoder.Encode(shortList, plain);
 
             List<ulong> shortList2 = new List<ulong>();
-            zkp_encoder.Decode(plain, shortList2);
+            encoder.Decode(plain, shortList2);
 
             Assert.AreEqual(20, shortList.Count);
             Assert.AreEqual(64, shortList2.Count);
@@ -79,7 +79,7 @@ namespace SEALNetTest
                 Assert.AreEqual(shortList[i], shortList2[i]);
             }
 
-            for (ulong i = 20; i < zkp_encoder.SlotCount; i++)
+            for (ulong i = 20; i < encoder.SlotCount; i++)
             {
                 Assert.AreEqual(0ul, shortList2[checked((int)i)]);
             }
@@ -97,38 +97,38 @@ namespace SEALNetTest
                 expandModChain: false,
                 secLevel: SecLevelType.None);
 
-            BatchEncoder zkp_encoder = new BatchEncoder(context);
+            BatchEncoder encoder = new BatchEncoder(context);
 
-            Assert.AreEqual(64ul, zkp_encoder.SlotCount);
+            Assert.AreEqual(64ul, encoder.SlotCount);
 
             List<long> plainList = new List<long>();
-            for (ulong i = 0; i < zkp_encoder.SlotCount; i++)
+            for (ulong i = 0; i < encoder.SlotCount; i++)
             {
                 plainList.Add((long)i);
             }
 
             Plaintext plain = new Plaintext();
-            zkp_encoder.Encode(plainList, plain);
+            encoder.Encode(plainList, plain);
 
             List<long> plainList2 = new List<long>();
-            zkp_encoder.Decode(plain, plainList2);
+            encoder.Decode(plain, plainList2);
 
-            for (ulong i = 0; i < zkp_encoder.SlotCount; i++)
+            for (ulong i = 0; i < encoder.SlotCount; i++)
             {
                 Assert.AreEqual(plainList[checked((int)i)], plainList2[checked((int)i)]);
             }
 
-            for (ulong i = 0; i < zkp_encoder.SlotCount; i++)
+            for (ulong i = 0; i < encoder.SlotCount; i++)
             {
                 plainList[checked((int)i)] = 5;
             }
 
-            zkp_encoder.Encode(plainList, plain);
+            encoder.Encode(plainList, plain);
             Assert.AreEqual("5", plain.ToString());
 
-            zkp_encoder.Decode(plain, plainList2);
+            encoder.Decode(plain, plainList2);
 
-            for (ulong i = 0; i < zkp_encoder.SlotCount; i++)
+            for (ulong i = 0; i < encoder.SlotCount; i++)
             {
                 Assert.AreEqual(plainList[checked((int)i)], plainList2[checked((int)i)]);
             }
@@ -139,10 +139,10 @@ namespace SEALNetTest
                 shortList.Add((long)i);
             }
 
-            zkp_encoder.Encode(shortList, plain);
+            encoder.Encode(shortList, plain);
 
             List<long> shortList2 = new List<long>();
-            zkp_encoder.Decode(plain, shortList2);
+            encoder.Decode(plain, shortList2);
 
             Assert.AreEqual(20, shortList.Count);
             Assert.AreEqual(64, shortList2.Count);
@@ -152,7 +152,7 @@ namespace SEALNetTest
                 Assert.AreEqual(shortList[i], shortList2[i]);
             }
 
-            for (ulong i = 20; i < zkp_encoder.SlotCount; i++)
+            for (ulong i = 20; i < encoder.SlotCount; i++)
             {
                 Assert.AreEqual(0L, shortList2[checked((int)i)]);
             }
@@ -173,7 +173,7 @@ namespace SEALNetTest
 
             Utilities.AssertThrows<ArgumentException>(() =>
             {
-                BatchEncoder zkp_encoder = new BatchEncoder(context);
+                BatchEncoder encoder = new BatchEncoder(context);
             });
         }
 

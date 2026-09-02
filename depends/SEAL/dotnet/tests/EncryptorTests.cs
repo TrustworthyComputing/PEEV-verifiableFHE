@@ -367,7 +367,7 @@ namespace SEALNetTest
                 keygen.CreatePublicKey(out PublicKey publicKey);
                 SecretKey secretKey = keygen.SecretKey;
                 Decryptor decryptor = new Decryptor(context, secretKey);
-                CKKSEncoder zkp_encoder = new CKKSEncoder(context);
+                CKKSEncoder encoder = new CKKSEncoder(context);
 
                 Assert.IsNotNull(decryptor);
 
@@ -387,7 +387,7 @@ namespace SEALNetTest
                     cipher.Scale = Math.Pow(2.0, 30);
                     decryptor.Decrypt(cipher, plain);
 
-                    zkp_encoder.Decode(plain, res);
+                    encoder.Decode(plain, res);
                     foreach (Complex val in res)
                     {
                         Assert.AreEqual(val.Real, 0.0, 0.01);
@@ -403,7 +403,7 @@ namespace SEALNetTest
                     decryptor.Decrypt(cipher, plain);
                     Assert.AreEqual(plain.ParmsId, nextParms);
 
-                    zkp_encoder.Decode(plain, res);
+                    encoder.Decode(plain, res);
                     foreach (Complex val in res)
                     {
                         Assert.AreEqual(val.Real, 0.0, 0.01);
@@ -420,7 +420,7 @@ namespace SEALNetTest
                     cipher.Scale = Math.Pow(2.0, 30);
                     decryptor.Decrypt(cipher, plain);
 
-                    zkp_encoder.Decode(plain, res);
+                    encoder.Decode(plain, res);
                     foreach (Complex val in res)
                     {
                         Assert.AreEqual(val.Real, 0.0, 0.01);
@@ -436,7 +436,7 @@ namespace SEALNetTest
                     decryptor.Decrypt(cipher, plain);
                     Assert.AreEqual(plain.ParmsId, nextParms);
 
-                    zkp_encoder.Decode(plain, res);
+                    encoder.Decode(plain, res);
                     foreach (Complex val in res)
                     {
                         Assert.AreEqual(val.Real, 0.0, 0.01);
@@ -456,7 +456,7 @@ namespace SEALNetTest
                     cipher.Scale = Math.Pow(2.0, 30);
                     decryptor.Decrypt(cipher, plain);
 
-                    zkp_encoder.Decode(plain, res);
+                    encoder.Decode(plain, res);
                     foreach (Complex val in res)
                     {
                         Assert.AreEqual(val.Real, 0.0, 0.01);
@@ -478,7 +478,7 @@ namespace SEALNetTest
                     decryptor.Decrypt(cipher, plain);
                     Assert.AreEqual(plain.ParmsId, nextParms);
 
-                    zkp_encoder.Decode(plain, res);
+                    encoder.Decode(plain, res);
                     foreach (Complex val in res)
                     {
                         Assert.AreEqual(val.Real, 0.0, 0.01);
@@ -498,7 +498,7 @@ namespace SEALNetTest
                     cipher.Scale = Math.Pow(2.0, 30);
                     decryptor.Decrypt(cipher, plain);
 
-                    zkp_encoder.Decode(plain, res);
+                    encoder.Decode(plain, res);
                     foreach (Complex val in res)
                     {
                         Assert.AreEqual(val.Real, 0.0, 0.01);
@@ -520,7 +520,7 @@ namespace SEALNetTest
                     decryptor.Decrypt(cipher, plain);
                     Assert.AreEqual(plain.ParmsId, nextParms);
 
-                    zkp_encoder.Decode(plain, res);
+                    encoder.Decode(plain, res);
                     foreach (Complex val in res)
                     {
                         Assert.AreEqual(val.Real, 0.0, 0.01);

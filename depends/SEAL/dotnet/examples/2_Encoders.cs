@@ -253,14 +253,14 @@ namespace SEALNetExamples
             using Decryptor decryptor = new Decryptor(context, secretKey);
 
             /*
-            To create CKKS plaintexts we need a special zkp_encoder: there is no other way
+            To create CKKS plaintexts we need a special encoder: there is no other way
             to create them. The BatchEncoder cannot be used with the
             CKKS scheme. The CKKSEncoder encodes vectors of real or complex numbers into
             Plaintext objects, which can subsequently be encrypted. At a high level this
             looks a lot like what BatchEncoder does for the BFV scheme, but the theory
             behind it is completely different.
             */
-            using CKKSEncoder zkp_encoder = new CKKSEncoder(context);
+            using CKKSEncoder encoder = new CKKSEncoder(context);
 
             /*
             In CKKS the number of slots is PolyModulusDegree / 2 and each slot encodes
@@ -268,7 +268,7 @@ namespace SEALNetExamples
             the BFV scheme, where the number of slots is equal to PolyModulusDegree
             and they are arranged into a matrix with two rows.
             */
-            ulong slotCount = zkp_encoder.SlotCount;
+            ulong slotCount = encoder.SlotCount;
             Console.WriteLine($"Number of slots: {slotCount}");
 
             /*
@@ -297,14 +297,14 @@ namespace SEALNetExamples
             double scale = Math.Pow(2.0, 30);
             Utilities.PrintLine();
             Console.WriteLine("Encode input vector.");
-            zkp_encoder.Encode(input, scale, plain);
+            encoder.Encode(input, scale, plain);
 
             /*
             We can instantly decode to check the correctness of encoding.
             */
             List<double> output = new List<double>();
             Console.WriteLine("    + Decode input vector ...... Correct.");
-            zkp_encoder.Decode(plain, output);
+            encoder.Decode(plain, output);
             Utilities.PrintVector(output);
 
             /*
@@ -334,7 +334,7 @@ namespace SEALNetExamples
             Utilities.PrintLine();
             Console.WriteLine("Decrypt and decode.");
             decryptor.Decrypt(encrypted, plain);
-            zkp_encoder.Decode(plain, output);
+            encoder.Decode(plain, output);
             Console.WriteLine("    + Result vector ...... Correct.");
             Utilities.PrintVector(output);
 
@@ -351,7 +351,7 @@ namespace SEALNetExamples
             Utilities.PrintExampleBanner("Example: Encoders");
 
             /*
-            Run all zkp_encoder examples.
+            Run all encoder examples.
             */
             ExampleBatchEncoder();
             ExampleCKKSEncoder();

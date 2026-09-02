@@ -276,11 +276,11 @@ namespace SEALNetExamples
                 Next set up the CKKSEncoder and Encryptor, and encrypt some numbers.
                 */
                 double scale = Math.Pow(2.0, 30);
-                CKKSEncoder zkp_encoder = new CKKSEncoder(context);
+                CKKSEncoder encoder = new CKKSEncoder(context);
                 using Plaintext plain1 = new Plaintext(),
                                 plain2 = new Plaintext();
-                zkp_encoder.Encode(2.3, scale, plain1);
-                zkp_encoder.Encode(4.5, scale, plain2);
+                encoder.Encode(2.3, scale, plain1);
+                encoder.Encode(4.5, scale, plain2);
 
                 using Encryptor encryptor = new Encryptor(context, pk);
 
@@ -397,7 +397,7 @@ namespace SEALNetExamples
                 using SecretKey sk = new SecretKey();
                 sk.Load(context, skStream);
                 using Decryptor decryptor = new Decryptor(context, sk);
-                using CKKSEncoder zkp_encoder = new CKKSEncoder(context);
+                using CKKSEncoder encoder = new CKKSEncoder(context);
 
                 using Ciphertext encryptedResult = new Ciphertext();
                 encryptedResult.Load(context, dataStream);
@@ -405,13 +405,13 @@ namespace SEALNetExamples
                 using Plaintext plainResult = new Plaintext();
                 decryptor.Decrypt(encryptedResult, plainResult);
                 List<double> result = new List<double>();
-                zkp_encoder.Decode(plainResult, result);
+                encoder.Decode(plainResult, result);
 
                 Utilities.PrintLine();
                 Console.WriteLine("Decrypt and decode PI * x ^ 3 + 0.4x + 1.");
                 Console.WriteLine("    + Expected result:");
-                List<double> trueResult = new List<double>((int)zkp_encoder.SlotCount);
-                for (ulong i = 0; i < zkp_encoder.SlotCount; i++)
+                List<double> trueResult = new List<double>((int)encoder.SlotCount);
+                for (ulong i = 0; i < encoder.SlotCount; i++)
                 {
                     trueResult.Add(2.3 * 4.5);
                 }

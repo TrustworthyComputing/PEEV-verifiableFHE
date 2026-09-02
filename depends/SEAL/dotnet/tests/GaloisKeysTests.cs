@@ -171,7 +171,7 @@ namespace SEALNetTest
                 Encryptor encryptor = new Encryptor(context, publicKey);
                 Decryptor decryptor = new Decryptor(context, keygen.SecretKey);
                 Evaluator evaluator = new Evaluator(context);
-                BatchEncoder zkp_encoder = new BatchEncoder(context);
+                BatchEncoder encoder = new BatchEncoder(context);
 
                 GaloisKeys galoisKeys = new GaloisKeys();
                 using (MemoryStream stream = new MemoryStream())
@@ -188,7 +188,7 @@ namespace SEALNetTest
                     5, 6, 7, 8
                 };
 
-                zkp_encoder.Encode(vec, plain);
+                encoder.Encode(vec, plain);
 
                 Ciphertext encrypted = new Ciphertext();
                 Ciphertext encdest = new Ciphertext();
@@ -197,7 +197,7 @@ namespace SEALNetTest
                 encryptor.Encrypt(plain, encrypted);
                 evaluator.RotateColumns(encrypted, galoisKeys, encdest);
                 decryptor.Decrypt(encdest, plaindest);
-                zkp_encoder.Decode(plaindest, vec);
+                encoder.Decode(plaindest, vec);
 
                 Assert.IsTrue(AreCollectionsEqual(vec, new List<ulong>
                 {
@@ -207,7 +207,7 @@ namespace SEALNetTest
 
                 evaluator.RotateRows(encdest, -1, galoisKeys, encrypted);
                 decryptor.Decrypt(encrypted, plaindest);
-                zkp_encoder.Decode(plaindest, vec);
+                encoder.Decode(plaindest, vec);
 
                 Assert.IsTrue(AreCollectionsEqual(vec, new List<ulong>
                 {
@@ -217,7 +217,7 @@ namespace SEALNetTest
 
                 evaluator.RotateRowsInplace(encrypted, 2, galoisKeys);
                 decryptor.Decrypt(encrypted, plaindest);
-                zkp_encoder.Decode(plaindest, vec);
+                encoder.Decode(plaindest, vec);
 
                 Assert.IsTrue(AreCollectionsEqual(vec, new List<ulong>
                 {
@@ -227,7 +227,7 @@ namespace SEALNetTest
 
                 evaluator.RotateColumnsInplace(encrypted, galoisKeys);
                 decryptor.Decrypt(encrypted, plaindest);
-                zkp_encoder.Decode(plaindest, vec);
+                encoder.Decode(plaindest, vec);
 
                 Assert.IsTrue(AreCollectionsEqual(vec, new List<ulong>
                 {
@@ -251,7 +251,7 @@ namespace SEALNetTest
                 Encryptor encryptor = new Encryptor(context, publicKey);
                 Decryptor decryptor = new Decryptor(context, keygen.SecretKey);
                 Evaluator evaluator = new Evaluator(context);
-                BatchEncoder zkp_encoder = new BatchEncoder(context);
+                BatchEncoder encoder = new BatchEncoder(context);
 
                 GaloisKeys galoisKeys = new GaloisKeys();
                 using (MemoryStream stream = new MemoryStream())
@@ -268,7 +268,7 @@ namespace SEALNetTest
                     5, 6, 7, 8
                 };
 
-                zkp_encoder.Encode(vec, plain);
+                encoder.Encode(vec, plain);
 
                 Ciphertext encrypted = new Ciphertext();
                 Ciphertext encdest = new Ciphertext();
@@ -277,7 +277,7 @@ namespace SEALNetTest
                 encryptor.Encrypt(plain, encrypted);
                 evaluator.RotateColumns(encrypted, galoisKeys, encdest);
                 decryptor.Decrypt(encdest, plaindest);
-                zkp_encoder.Decode(plaindest, vec);
+                encoder.Decode(plaindest, vec);
 
                 Assert.IsTrue(AreCollectionsEqual(vec, new List<ulong>
                 {
@@ -287,7 +287,7 @@ namespace SEALNetTest
 
                 evaluator.RotateRows(encdest, -1, galoisKeys, encrypted);
                 decryptor.Decrypt(encrypted, plaindest);
-                zkp_encoder.Decode(plaindest, vec);
+                encoder.Decode(plaindest, vec);
 
                 Assert.IsTrue(AreCollectionsEqual(vec, new List<ulong>
                 {
@@ -297,7 +297,7 @@ namespace SEALNetTest
 
                 evaluator.RotateRowsInplace(encrypted, 2, galoisKeys);
                 decryptor.Decrypt(encrypted, plaindest);
-                zkp_encoder.Decode(plaindest, vec);
+                encoder.Decode(plaindest, vec);
 
                 Assert.IsTrue(AreCollectionsEqual(vec, new List<ulong>
                 {
@@ -307,7 +307,7 @@ namespace SEALNetTest
 
                 evaluator.RotateColumnsInplace(encrypted, galoisKeys);
                 decryptor.Decrypt(encrypted, plaindest);
-                zkp_encoder.Decode(plaindest, vec);
+                encoder.Decode(plaindest, vec);
 
                 Assert.IsTrue(AreCollectionsEqual(vec, new List<ulong>
                 {

@@ -98,8 +98,8 @@ namespace SEALNetExamples
             using Evaluator evaluator = new Evaluator(context);
             using Decryptor decryptor = new Decryptor(context, secretKey);
 
-            using CKKSEncoder zkp_encoder = new CKKSEncoder(context);
-            ulong slotCount = zkp_encoder.SlotCount;
+            using CKKSEncoder encoder = new CKKSEncoder(context);
+            ulong slotCount = encoder.SlotCount;
             Console.WriteLine($"Number of slots: {slotCount}");
 
             List<double> input = new List<double>((int)slotCount);
@@ -120,14 +120,14 @@ namespace SEALNetExamples
             using Plaintext plainCoeff3 = new Plaintext(),
                             plainCoeff1 = new Plaintext(),
                             plainCoeff0 = new Plaintext();
-            zkp_encoder.Encode(3.14159265, scale, plainCoeff3);
-            zkp_encoder.Encode(0.4, scale, plainCoeff1);
-            zkp_encoder.Encode(1.0, scale, plainCoeff0);
+            encoder.Encode(3.14159265, scale, plainCoeff3);
+            encoder.Encode(0.4, scale, plainCoeff1);
+            encoder.Encode(1.0, scale, plainCoeff0);
 
             using Plaintext xPlain = new Plaintext();
             Utilities.PrintLine();
             Console.WriteLine("Encode input vectors.");
-            zkp_encoder.Encode(input, scale, xPlain);
+            encoder.Encode(input, scale, xPlain);
             using Ciphertext x1Encrypted = new Ciphertext();
             encryptor.Encrypt(xPlain, x1Encrypted);
 
@@ -307,7 +307,7 @@ namespace SEALNetExamples
             */
             decryptor.Decrypt(encryptedResult, plainResult);
             List<double> result = new List<double>();
-            zkp_encoder.Decode(plainResult, result);
+            encoder.Decode(plainResult, result);
             Console.WriteLine("    + Computed result ...... Correct.");
             Utilities.PrintVector(result, 3, 7);
 
